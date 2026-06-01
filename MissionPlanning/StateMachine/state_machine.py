@@ -11,6 +11,7 @@ Reference:
 
 import string
 from urllib.request import urlopen, Request
+from urllib.error import HTTPError
 from base64 import b64encode
 from zlib import compress
 from io import BytesIO
@@ -288,7 +289,7 @@ class StateMachine:
             plt.imshow(imread(BytesIO(content), format="png"))
             plt.axis("off")
             plt.show()
-        except Exception as e:
+        except (OSError, ValueError, TimeoutError, HTTPError) as e:
             print(f"Error showing PlantUML: {e}")
 
         return plant_uml_text
