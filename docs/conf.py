@@ -214,7 +214,7 @@ def linkcode_resolve(domain, info):
         srcfile = inspect.getsourcefile(obj)
         srcfile = get_relative_path_from_parent(srcfile, "PythonRobotics")
         lineno = inspect.getsourcelines(obj)[1]
-    except Exception:
+    except (TypeError, OSError):
         return None
 
     return f"{GITHUB_REPO}/blob/{GITHUB_BRANCH}/{srcfile}#L{lineno}"
