@@ -222,6 +222,20 @@ def _dubins_path_planning_from_origin(end_x, end_y, end_yaw, curvature,
         if best_cost > cost:  # Select minimum length one.
             b_d1, b_d2, b_d3, b_mode, best_cost = d1, d2, d3, mode, cost
 
+    if b_mode is None:
+        if not planning_funcs:
+            raise ValueError(
+                "No valid Dubins path found: selected_types is empty, "
+                "so no path planners were tried. Pass at least one of "
+                "LSL/RSR/LSR/RSL/RLR/LRL or leave selected_types=None."
+            )
+        raise ValueError(
+            "No valid Dubins path found: none of the selected path "
+            "types produced a feasible configuration "
+            "(alpha=%r, beta=%r, d=%r). Try a different start/goal "
+            "or a larger curvature." % (alpha, beta, d)
+        )
+
     lengths = [b_d1, b_d2, b_d3]
     x_list, y_list, yaw_list = _generate_local_course(lengths, b_mode,
                                                       curvature, step_size)
