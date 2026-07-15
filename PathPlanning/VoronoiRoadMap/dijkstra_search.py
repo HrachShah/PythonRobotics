@@ -97,6 +97,9 @@ class DijkstraSearch:
                 else:
                     open_set[n_id] = node
 
+        if not self.has_node_in_set(close_set, goal_node):
+            return [], []
+
         # generate final course
         rx, ry = self.generate_final_path(close_set, goal_node)
 
