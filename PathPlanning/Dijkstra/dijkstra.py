@@ -68,6 +68,10 @@ class DijkstraPlanner:
         goal_node = self.Node(self.calc_xy_index(gx, self.min_x),
                               self.calc_xy_index(gy, self.min_y), 0.0, -1)
 
+        if not self.verify_node(start_node) or not self.verify_node(goal_node):
+            print("Start or goal is outside the map or occupied")
+            return [], []
+
         open_set, closed_set = dict(), dict()
         open_set[self.calc_index(start_node)] = start_node
 

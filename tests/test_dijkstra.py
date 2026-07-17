@@ -29,3 +29,26 @@ def test_no_path_returns_empty_route():
     assert rx == []
     assert ry == []
 
+
+def test_start_or_goal_on_obstacle_returns_empty_route():
+    m.show_animation = False
+    ox = [0.0, 0.0, 2.0, 2.0]
+    oy = [0.0, 2.0, 0.0, 2.0]
+
+    planner = m.DijkstraPlanner(ox, oy, 1.0, 0.6)
+    rx, ry = planner.planning(0.0, 0.0, 1.0, 1.0)
+
+    assert rx == []
+    assert ry == []
+
+
+def test_start_or_goal_on_obstacle_returns_empty_route():
+    m.show_animation = False
+    ox = [0.0, 0.0, 2.0, 2.0]
+    oy = [0.0, 2.0, 0.0, 2.0]
+
+    planner = m.DijkstraPlanner(ox, oy, 1.0, 0.6)
+    rx, ry = planner.planning(0.0, 0.0, 1.0, 1.0)
+
+    assert rx == []
+    assert ry == []
