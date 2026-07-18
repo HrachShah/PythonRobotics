@@ -49,11 +49,11 @@ class Grid:
         self,
         grid_size: np.ndarray,
         num_obstacles: int = 40,
-        obstacle_avoid_points: list[Position] = [],
+        obstacle_avoid_points: list[Position] | None = None,
         obstacle_arrangement: ObstacleArrangement = ObstacleArrangement.RANDOM,
         time_limit: int = 100,
     ):
-        self.obstacle_avoid_points = obstacle_avoid_points
+        self.obstacle_avoid_points = list(obstacle_avoid_points or [])
         self.time_limit = time_limit
         self.grid_size = grid_size
         self.reservation_matrix = np.zeros((grid_size[0], grid_size[1], self.time_limit))
