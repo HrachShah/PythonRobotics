@@ -158,6 +158,9 @@ class DijkstraPlanner:
         if py >= self.max_y:
             return False
 
+        if node.x >= self.x_width or node.y >= self.y_width:
+            return False
+
         if self.obstacle_map[node.x][node.y]:
             return False
 
