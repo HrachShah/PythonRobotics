@@ -15,3 +15,11 @@ def test_verify_node_rejects_upper_bounds():
 
 if __name__ == '__main__':
     conftest.run_this_test(__file__)
+
+
+def test_planning_returns_empty_path_when_goal_is_unreachable():
+    planner = m.DijkstraPlanner([0, 2], [0, 2], 1.0, 0.0)
+    planner.obstacle_map[1][1] = True
+    rx, ry = planner.planning(0.0, 0.0, 1.0, 1.0)
+    assert rx == []
+    assert ry == []
