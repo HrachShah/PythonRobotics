@@ -23,3 +23,11 @@ def test_planning_returns_empty_path_when_goal_is_unreachable():
     rx, ry = planner.planning(0.0, 0.0, 1.0, 1.0)
     assert rx == []
     assert ry == []
+
+
+def test_planning_returns_empty_path_for_occupied_endpoints():
+    planner = m.DijkstraPlanner([0, 2], [0, 2], 1.0, 0.0)
+    planner.obstacle_map[0][0] = True
+    rx, ry = planner.planning(0.0, 0.0, 1.0, 1.0)
+    assert rx == []
+    assert ry == []
