@@ -196,6 +196,8 @@ class DijkstraPlanner:
 
         self.x_width = round((self.max_x - self.min_x) / self.resolution)
         self.y_width = round((self.max_y - self.min_y) / self.resolution)
+        if self.x_width < 1 or self.y_width < 1:
+            raise ValueError("obstacle bounds must span at least one grid cell")
         print("x_width:", self.x_width)
         print("y_width:", self.y_width)
 

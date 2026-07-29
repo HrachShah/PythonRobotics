@@ -44,3 +44,5 @@ def test_constructor_rejects_invalid_map_parameters():
         m.DijkstraPlanner([0, 2], [0], 1.0, 0.0)
     with pytest.raises(ValueError, match="at least one"):
         m.DijkstraPlanner([], [], 1.0, 0.0)
+    with pytest.raises(ValueError, match="at least one grid cell"):
+        m.DijkstraPlanner([0, 1], [0, 1], 2.0, 0.0)
