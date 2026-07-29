@@ -32,6 +32,15 @@ class DijkstraPlanner:
         self.y_width = None
         self.obstacle_map = None
 
+        if resolution <= 0:
+            raise ValueError("resolution must be greater than zero")
+        if robot_radius < 0:
+            raise ValueError("robot_radius cannot be negative")
+        if len(ox) != len(oy):
+            raise ValueError("ox and oy must contain the same number of points")
+        if not ox:
+            raise ValueError("at least one obstacle point is required")
+
         self.resolution = resolution
         self.robot_radius = robot_radius
         self.calc_obstacle_map(ox, oy)

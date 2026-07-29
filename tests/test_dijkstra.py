@@ -1,3 +1,5 @@
+import pytest
+
 import conftest
 from PathPlanning.Dijkstra import dijkstra as m
 
@@ -31,3 +33,14 @@ def test_planning_returns_empty_path_for_occupied_endpoints():
     rx, ry = planner.planning(0.0, 0.0, 1.0, 1.0)
     assert rx == []
     assert ry == []
+
+
+def test_constructor_rejects_invalid_map_parameters():
+    with pytest.raises(ValueError, match="resolution"):
+        m.DijkstraPlanner([0, 2], [0, 2], 0.0, 0.0)
+    with pytest.raises(ValueError, match="robot_radius"):
+        m.DijkstraPlanner([0, 2], [0, 2], 1.0, -1.0)
+    with pytest.raises(ValueError, match="same number"):
+        m.DijkstraPlanner([0, 2], [0], 1.0, 0.0)
+    with pytest.raises(ValueError, match="at least one"):
+        m.DijkstraPlanner([], [], 1.0, 0.0)
