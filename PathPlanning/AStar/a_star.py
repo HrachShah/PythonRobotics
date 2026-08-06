@@ -184,6 +184,9 @@ class AStarPlanner:
         elif py >= self.max_y:
             return False
 
+        if not (0 <= node.x < self.x_width and 0 <= node.y < self.y_width):
+            return False
+
         # collision check
         if self.obstacle_map[node.x][node.y]:
             return False
