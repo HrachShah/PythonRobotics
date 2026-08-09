@@ -74,6 +74,7 @@ class AStarPlanner:
 
         open_set, closed_set = dict(), dict()
         open_set[self.calc_grid_index(start_node)] = start_node
+        found_goal = False
 
         while True:
             if len(open_set) == 0:
@@ -102,6 +103,7 @@ class AStarPlanner:
                 print("Find goal")
                 goal_node.parent_index = current.parent_index
                 goal_node.cost = current.cost
+                found_goal = True
                 break
 
             # Remove the item from the open set
@@ -130,6 +132,10 @@ class AStarPlanner:
                     if open_set[n_id].cost > node.cost:
                         # This path is the best until now. record it
                         open_set[n_id] = node
+
+        if not found_goal:
+            print("Could not find a path")
+            return [], []
 
         rx, ry = self.calc_final_path(goal_node, closed_set)
 
