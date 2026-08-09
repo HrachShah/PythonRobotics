@@ -47,6 +47,7 @@ class DijkstraSearch:
         start_node = self.Node(sx, sy, 0.0, -1)
         goal_node = self.Node(gx, gy, 0.0, -1)
         current_node = None
+        found_path = False
 
         open_set, close_set = dict(), dict()
         open_set[self.find_id(node_x, node_y, start_node)] = start_node
@@ -56,6 +57,7 @@ class DijkstraSearch:
                 print("goal is found!")
                 goal_node.parent = current_node.parent
                 goal_node.cost = current_node.cost
+                found_path = True
                 break
             elif not open_set:
                 print("Cannot find path")
@@ -96,6 +98,9 @@ class DijkstraSearch:
                         open_set[n_id] = node
                 else:
                     open_set[n_id] = node
+
+        if not found_path:
+            return [], []
 
         # generate final course
         rx, ry = self.generate_final_path(close_set, goal_node)
